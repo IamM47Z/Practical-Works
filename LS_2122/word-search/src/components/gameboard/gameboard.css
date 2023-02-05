@@ -1,0 +1,25 @@
+.gameboard
+{
+    display: grid;
+    background-color: rgb(28, 44, 49);
+    flex-wrap: nowrap;
+    padding: 1em;
+    border-radius: 10px;
+    border-style: ridge;
+    border-color: black;
+}
+
+.gameboard.easy
+{
+    grid: repeat( 8, auto ) / repeat( 8, auto );
+}
+
+.gameboard.medium
+{
+    grid: repeat( 10, auto ) / repeat( 10, auto );
+}
+
+.gameboard.hard
+{
+    grid: repeat( 12, auto ) / repeat( 12, auto );
+}

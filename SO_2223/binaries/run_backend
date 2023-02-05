@@ -1,0 +1,9 @@
+#!/bin/sh
+export HEARTBEAT=15
+export FUSERS="users.txt"
+export FITEMS="items.txt"
+export FPROMOTERS="promotores.txt"
+
+cd "$(dirname "$0")"
+clear
+./backend

@@ -1,0 +1,19 @@
+.counter
+{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: rgb(28, 44, 49);
+    justify-content: center;
+    margin-left: 40%;
+    margin-right: 40%;
+    border-radius: 10px;
+    border-style: ridge;
+    border-color: black;
+    padding: 1em;
+}
+
+.counter-time
+{
+    color:rgb(224, 224, 224);
+}

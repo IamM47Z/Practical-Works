@@ -1,0 +1,10 @@
+#!/bin/sh
+export HEARTBEAT=15
+
+cd "$(dirname "$0")"
+clear
+if [ $# -eq 0 ]; then
+    ./frontend m47z m47z
+else
+    ./frontend "$@"
+fi

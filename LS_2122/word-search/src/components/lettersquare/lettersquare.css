@@ -1,0 +1,26 @@
+.letter-square, .letter-square:active
+{
+    border: 0.5px solid rgb(55, 55, 55);
+    border-radius: 5px;
+    background-color: cornflowerblue;
+
+    width: 2.5em;
+    height: 2.5em;
+
+    cursor: pointer;
+}
+
+.letter-square:hover
+{
+    background-color: rgb(84, 129, 213) !important;
+}
+
+.letter-square.active
+{
+    background-color: rgba(255, 0, 0, 0.356) !important;
+}
+
+.letter-square.valid
+{
+    background-color: rgba(4, 254, 0, 0.356) !important;
+}
