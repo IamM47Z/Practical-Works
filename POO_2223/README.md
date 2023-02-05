@@ -1,4 +1,4 @@
-# FS2021
+# FS 2023
 In order for the application to be operational, we need to add a few features to comply with the copyright held by the teachers on the original files used in the project.
 
 ## Terminal
