@@ -1,0 +1,3 @@
+# remove binary and objects
+objects/
+binaries/main

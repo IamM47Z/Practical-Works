@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/favicon.ico">
+    <script src="events.js"></script>
+    <!-- obtido diretamente do site original de forma a permanecer fiel ao site -->
+    <title>Comprar e arrendar casa | Imovirtual</title>
+
+    <script type="text/javascript">
+        function translate_elem_init() {
+            new google.translate.TranslateElement({ pageLanguage: 'pt', layout: google.translate.TranslateElement.FloatPosition.BOTTOM_LEFT }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=translate_elem_init"></script>
+</head>
+
+<body>
+    <div id="overlay"></div>
+    <div id="search_container">
+        <div id="search_query">
+            <h3>Calcular Preço do Imovel</h3>
+            <form id="search_form">
+                <select class="selection" name="type" id="type-select" required>
+                    <option value="" hidden>Tipologia</option>
+                    <option value="all">Todos</option>
+                    <option value="T1">T1</option>
+                    <option value="T2">T2</option>
+                    <option value="T3">T3</option>
+                    <option value="T4">T4</option>
+                    <option value="T5">T5</option>
+                    <option value="T6">T6</option>
+                    <option value="T7">T7</option>
+                    <option value="T8">T8</option>
+                    <option value="T9">T9</option>
+                    <option value="over_T10">T10 ou superior</option>
+                </select>
+                <div class="selection">
+                    <input type="number" min="0" name="area" placeholder="Insira a Área util (m&sup2;)" required>
+                </div>
+                <div class="selection">
+                    <input type="number" min="0" name="age" placeholder="Insira a idade" required>
+                </div>
+                <div>
+                    <label>Garagem</label>
+                    <input type="checkbox" name="garage" id="garage-checkbox">
+                </div>
+                <div>
+                    <label>Proximo de Transportes Públicos</label>
+                    <input type="checkbox" id="public-transports-checkbox">
+                </div>
+                <a class="submit-btn" href="javascript:calc_imobile_price()">Calcular</a>
+            </form>
+            <div>
+                <a href="javascript:toogle_financing_screen( )">Financiamento</a>
+            </div>
+            <div></div>
+        </div>
+        <div id="search_result">
+            <div>
+                <span>Zona: Coimbra</span>
+                <span>Tipo de Alojamento: <span id="type"></span></span>
+                <span>Área do Alojamento: <span id="area"></span>m&sup2;</span>
+                <span>Preço: <span id="zone_a_price"></span>€</span>
+            </div>
+            <div>
+                <span>Zona: Porto</span>
+                <span>Tipo de Alojamento: <span id="type"></span></span>
+                <span>Área do Alojamento: <span id="area"></span>m&sup2;</span>
+                <span>Preço: <span id="zone_b_price"></span>€</span>
+            </div>
+            <div>
+                <span>Zona: Lisboa</span>
+                <span>Tipo de Alojamento: <span id="type"></span></span>
+                <span>Área do Alojamento: <span id="area"></span>m&sup2;</span>
+                <span>Preço: <span id="zone_c_price"></span>€</span>
+            </div>
+        </div>
+    </div>
+    <div id="financing_screen">
+        <div id="financing_query">
+            <h3>Simular Financiamento do Imovel</h3>
+            <form id="financing_form">
+                <div class="selection">
+                    <input type="number" min="0" name="value" placeholder="Montante Financiado" required>
+                </div>
+                <div class="selection">
+                    <input type="number" min="0" name="initial_value" placeholder="Entrada Inicial" required>
+                </div>
+                <div class="selection">
+                    <input type="number" min="0" name="deadline" placeholder="Prazo em anos" required>
+                </div>
+                <a class="submit-btn" href="javascript:calc_financing()">Financiamento</a>
+            </form>
+        </div>
+        <div id="financing_result">
+            <h3>Resultado do Financiamento</h3>
+            <div class="financing_box">
+                <img src="images/ca.png">
+                <div>
+                    <a href="#">Crédito Agrícola Crédito habitação Taxa Variável</a>
+                    <span class="bold"><span id="financing_price"></span>€</span>
+                    <p class="space"></p>
+                    <span>Spread: <span id="financing_spread"></span>%</span>
+                    <span>Taxa de Juro Total: <span id="financing_tax"></span>%</span>
+                    <span><span id="financing_month_price"></span>€/mês</span>
+                </div>
+            </div>
+            <div class="financing_box">
+                <img src="images/cgd.jpg">
+                <div>
+                    <a href="#">Caixa Geral de Depósitos Crédito habitação Taxa Variável</a>
+                    <span class="bold"><span id="financing_price"></span>€</span>
+                    <p class="space"></p>
+                    <span>Spread: <span id="financing_spread"></span>%</span>
+                    <span>Taxa de Juro Total: <span id="financing_tax"></span>%</span>
+                    <span><span id="financing_month_price"></span>€/mês</span>
+                </div>
+            </div>
+            <div class="financing_box">
+                <img src="images/santander.png">
+                <div>
+                    <a href="#">Santander Totta Crédito habitação Taxa Variável</a>
+                    <span class="bold"><span id="financing_price"></span>€</span>
+                    <p class="space"></p>
+                    <span>Spread: <span id="financing_spread"></span>%</span>
+                    <span>Taxa de Juro Total: <span id="financing_tax"></span>%</span>
+                    <span><span id="financing_month_price"></span>€/mês</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <ul class="navbar">
+            <li>
+                <a href=".\index.html"><img src="images/logo.png"></a>
+            </li>
+            <li>
+                <a href="#" class="dropdown-btn"> Anúncios <span class="arrow"></span> </a>
+                <ul class="dropdown">
+                    <li> <a href="#">Para comprar</a> </li>
+                    <li> <a href="#">Para alugar</a> </li>
+                    <li> <a href="#">Para férias</a> </li>
+                    <li> <a href="#">Empreendimentos</a> </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="dropdown-btn"> Empreendimentos <span class="arrow"></span> </a>
+                <ul class="dropdown">
+                    <li> <a href="#">Ver todos os anúncios de Empreendimentos</a> </li>
+                    <li>
+                        <div class="bold">Tipo</div>
+                        <ul class="dropdown-group">
+                            <li> <a href="#">Apartamentos novos</a> </li>
+                            <li> <a href="#">Moradias novas</a> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="bold">Promotores imobliários populares</div>
+                        <ul class="dropdown-group">
+                            <li> <a href="#">Porta da Frente Christie's</a> </li>
+                            <li> <a href="#">JLL Residential</a> </li>
+                            <li> <a href="#">Infante & Riu - Portugal Real Estate</a> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="bold">Localizações populares</div>
+                        <ul class="dropdown-group">
+                            <li> <a href="#">Avenidas Novas</a> </li>
+                            <li> <a href="#">Cascais e Estoril</a> </li>
+                            <li> <a href="#">Misericórdia</a> </li>
+                            <li> <a href="#">Santo António</a> </li>
+                            <li> <a href="#">Cedofeita</a> </li>
+                            <li> <a href="#">Santa Maria Maior</a> </li>
+                            <li> <a href="#">Alcântara</a> </li>
+                            <li> <a href="#">Estrela</a> </li>
+                            <li> <a href="#">Campo de Ourique</a> </li>
+                            <li> <a href="#">Matosinhos e Leça da Palmeira</a> </li>
+                            <li> <a href="#">Paranhos</a> </li>
+                            <li> <a href="#">Arroios</a> </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="dropdown-btn"> Profissionais <span class="arrow"></span> </a>
+                <ul class="dropdown">
+                    <li> <a href="#">Agências Imobiliárias</a> </li>
+                    <li> <a href="#">Promotores Imobiliários</a> </li>
+                </ul>
+            </li>
+            <li> <a href="#"> Blog </a> </li>
+            <li> <a href="#"> A Nossa Campanha </a> </li>
+            <li class="navbar-space"></li>
+            <li> <a href="#"> Conta Pessoal </a> </li>
+            <li>
+                <div id="google_translate_element"></div>
+            </li>
+            <li id="new_ads_btn_li"> <a id="new_ads_btn" class="bold" href="#"> Adicionar Anúncio </a> </li>
+            <li>
+                <a id="overlay-btn" href="javascript:toogle_overlays()">Abrir Menu</a>
+            </li>
+            <li>
+                <a class="picanha-btn" href="#">
+                    <svg viewBox="0 0 100 80" width="30" height="30">
+                        <rect width="100" height="4"></rect>
+                        <rect y="30" width="100" height="5"></rect>
+                        <rect y="60" width="100" height="7"></rect>
+                    </svg>
+                </a>
+                <ul class="picanha">
+                    <li>
+                        <a href="#" class="bold"> Anúncios </a>
+                        <ul>
+                            <li> <a href="#">Para comprar</a> </li>
+                            <li> <a href="#">Para alugar</a> </li>
+                            <li> <a href="#">Para férias</a> </li>
+                            <li> <a href="#">Empreendimentos</a> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="bold"> Empreendimentos </a>
+                        <ul>
+                            <li> <a href="#">Ver todos os anúncios de Empreendimentos</a> </li>
+                            <li> <a href="#">Apartamentos novos</a> </li>
+                            <li> <a href="#">Moradias novas</a> </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="bold"> Profissionais </a>
+                        <ul>
+                            <li> <a href="#">Agências Imobiliárias</a> </li>
+                            <li> <a href="#">Promotores Imobiliários</a> </li>
+                        </ul>
+                    </li>
+                    <li> <a href="#"> Blog </a> </li>
+                    <li> <a href="#"> A Nossa Campanha </a> </li>
+                    <li> <a href="#"> Conta Pessoal </a> </li>
+                    <li id="new_ads_btn_li"> <a id="new_ads_btn" class="bold" href="#"> Adicionar Anúncio </a> </li>
+                    <li>
+                        <a id="overlay-btn" href="javascript:toogle_overlays()">Abrir Menu</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div id="header-div">
+            <div id="search-header-div">
+                <h2>O melhor sítio para comprar e arrendar casa em Portugal</h2>
+                <div id="search-div">
+                    <ul class="form-switcher-menu">
+                        <li class="active">
+                            <a href="#">Pesquisar</a>
+                        </li>
+                        <li>
+                            <a href="#">Empreendimentos</a>
+                        </li>
+                    </ul>
+                    <div id="form-div">
+                        <form action="#" method="GET" id="search-form">
+                            <select class="selection" name="property" id="property-type-select">
+                                <option value="apartamentos">Apartamentos</option>
+                                <option value="moradias">Moradias</option>
+                                <option value="quartos">Quartos</option>
+                                <option value="terrenos">Terrenos</option>
+                                <option value="lojas">Lojas</option>
+                                <option value="armazens">Armazéns</option>
+                                <option value="garagens">Garagens</option>
+                                <option value="escritorios">Escritórios</option>
+                                <option value="predios">Prédios</option>
+                                <option value="quintas_herdades">Quintas e Herdades</option>
+                                <option value="trespasses">Trespasses</option>
+                                <option value="todos">Todos os anúncios</option>
+                            </select>
+                            <select class="selection" name="deal" id="deal-type-select">
+                                <option value="comprar">para comprar</option>
+                                <option value="arrendar">para arrendar</option>
+                                <option value="ferias">para férias</option>
+                            </select>
+                            <div class="selection" id="location-input-div">
+                                <input type="text" name="place" placeholder="Insira uma localização">
+                            </div>
+                            <button type="submit" class="submit-btn">Pesquisar</button>
+                            <select class="selection" name="price" id="price-select">
+                                <option value="" hidden>Preço</option>
+                                <option value="all">Todos</option>
+                                <option value="under_100k">até 100k€</option>
+                                <option value="betwen_100k_200k">entre 100k€ e 200k€</option>
+                                <option value="over_200k">acima de 200k€</option>
+                            </select>
+                            <select class="selection" name="area" id="area-select">
+                                <option value="" hidden>Área útil(m&sup2;)</option>
+                                <option value="all">Todos</option>
+                                <option value="under_500">até 500m&sup2;</option>
+                                <option value="betwen_500_1k">entre 500m&sup2; e 1000m&sup2;</option>
+                                <option value="over_1k">acima de 1000m&sup2;</option>
+                            </select>
+                            <select class="selection" name="enterprise" id="enterprise-select">
+                                <option value="" hidden>Empreendimento</option>
+                                <option value="all">Todos</option>
+                                <option value="yes">Sim</option>
+                                <option value="no">Não</option>
+                            </select>
+                            <select class="selection" name="type" id="type-select">
+                                <option value="" hidden>Tipologia</option>
+                                <option value="all">Todos</option>
+                                <option value="T1">T1</option>
+                                <option value="T2">T2</option>
+                                <option value="T3">T3</option>
+                                <option value="T4">T4</option>
+                                <option value="T5">T5</option>
+                                <option value="T6">T6</option>
+                                <option value="T7">T7</option>
+                                <option value="T8">T8</option>
+                                <option value="T9">T9</option>
+                                <option value="over_T10">T10 ou superior</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="announcements-div">
+            <h2>Anúncios destacados</h2>
+            <div id="announcements-grid">
+                <div class="announcement" id="announcement_1">
+                    <div>
+                        <h3>Preço sob consulta</h3>
+                        <h5>Belém, Lisboa</h5>
+                        <h6>267,80 m&sup2;</h6>
+                    </div>
+                </div>
+                <div class="announcement" id="announcement_2">
+                    <div>
+                        <h3>Preço sob consulta</h3>
+                        <h5>Cascais e Estori, Cascais, Lisboa</h5>
+                        <h6>2 630 m&sup2;</h6>
+                    </div>
+                </div>
+                <div class="announcement" id="announcement_3">
+                    <div>
+                        <h3>147 500€</h3>
+                        <h5>Avenida Vale de Milhaços, Corroios</h5>
+                        <h6>100 m&sup2;</h6>
+                    </div>
+                </div>
+                <div class="announcement" id="announcement_4">
+                    <div>
+                        <h3>Preço sob consulta</h3>
+                        <h5>Estrela, Lisboa</h5>
+                        <h6>1 579 m&sup2;</h6>
+                    </div>
+                </div>
+                <div class="announcement" id="announcement_5">
+                    <div>
+                        <h3>Preço sob consulta</h3>
+                        <h5>Rua Miguel Bombarda, Barreiro e Lavradio</h5>
+                    </div>
+                </div>
+                <div class="announcement" id="announcement_6">
+                    <div>
+                        <h3>170 000€</h3>
+                        <h5>Ardegão, Arnozela e Seidões, Fafe, Braga</h5>
+                        <h6>123 m&sup2;</h6>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button>Ver tudo</button>
+            </div>
+        </div>
+        <div id="info-div">
+            <h2>No Imovirtual vai encontrar</h2>
+            <div class="info-grid">
+                <div>
+                    <div id="info_img_apartamentos">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                        <a href="#">Para férias</a>
+                    </div>
+                    <span>Apartamentos</span>
+                </div>
+                <div>
+                    <div id="info_img_moradias">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                        <a href="#">Para férias</a>
+                    </div>
+                    <span>Moradias</span>
+                </div>
+                <div>
+                    <div id="info_img_quartos">
+                        <a href="#">para arrendar</a>
+                    </div>
+                    <span>Quartos</span>
+                </div>
+                <div>
+                    <div id="info_img_terrenos">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                    </div>
+                    <span>Terrenos</span>
+                </div>
+                <div>
+                    <div id="info_img_lojas">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                    </div>
+                    <span>Lojas</span>
+                </div>
+                <div>
+                    <div id="info_img_armazéns">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                    </div>
+                    <span>Armazéns</span>
+                </div>
+                <div>
+                    <div id="info_img_prédios">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                    </div>
+                    <span>Prédios</span>
+                </div>
+                <div>
+                    <div id="info_img_escritórios">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                    </div>
+                    <span>Escritórios</span>
+                </div>
+                <div>
+                    <div id="info_img_garagens">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                    </div>
+                    <span>Garagens</span>
+                </div>
+                <div>
+                    <div id="info_img_quintas_e_herdades">
+                        <a href="#">para comprar</a>
+                        <a href="#">para arrendar</a>
+                    </div>
+                    <span>Quintas e Herdades</span>
+                </div>
+                <div>
+                    <div id="info_img_trespasses">
+                        <a href="#">para comprar</a>
+                    </div>
+                    <span>Trespasses</span>
+                </div>
+                <div>
+                    <div id="info_img_empreendimentos">
+                        <a href="#">para comprar</a>
+                    </div>
+                    <span>Empreendimentos</span>
+                </div>
+            </div>
+        </div>
+        <div id="blog-div">
+            <h2>Blog</h2>
+            <div id="blog-grid">
+                <div id="news_1">
+                    <div>
+                        <span class="date">14.01.2022</span>
+                        <span class="description">IMOSÍNTESE - NOTÍCIAS 14/01</span>
+                    </div>
+                    <span class="type">NOTICIAS</span>
+                </div>
+                <div id="news_2">
+                    <div>
+                        <span class="date">14.01.2022</span>
+                        <span class="description">Tendências de Decoração para 2022</span>
+                    </div>
+                    <span class="type">DECORACAO</span>
+                </div>
+                <div id="news_3">
+                    <div>
+                        <span class="date">14.01.2022</span>
+                        <span class="description">IMOSÍNTESE - NOTÍCIAS 13/01</span>
+                    </div>
+                    <span class="type">NOTICIAS</span>
+                </div>
+            </div>
+            <div>
+                <button>mais artigos</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <ul class="footer">
+            <div id="header_footer_1">
+                <li>
+                    <h4>Pesquisas mais frequentes</h4>
+                </li>
+            </div>
+            <div id="text_footer_1">
+                <li> <a href="#">Comprar apartamentos em Lisboa</a> </li>
+                <li> <a href="#">Arrendar apartamento em Lisboa</a> </li>
+                <li> <a href="#">Comprar apartamento no Porto</a> </li>
+                <li> <a href="#">Comprar moradia em Vila Nova de Gaia</a> </li>
+                <li> <a href="#">Comprar moradia em Sintra</a> </li>
+            </div>
+            <div id="text_footer_2">
+                <li> <a href="#">Comprar escritório em Lisboa</a> </li>
+                <li> <a href="#">Comprar escritório no Porto</a> </li>
+                <li> <a href="#">Comprar loja no Porto</a> </li>
+                <li> <a href="#">Comprar armazém em Lisboa</a> </li>
+                <li> <a href="#">Comprar garagem no Porto</a> </li>
+            </div>
+
+            <div id="header_footer_2">
+                <li>
+                    <h4>Anúncios recentes</h4>
+                </li>
+            </div>
+            <div id="text_footer_3">
+                <li> <a href="#">Terreno</a></li>
+                <li> <a href="#">armazém</a></li>
+                <li> <a href="#">Terreno</a></li>
+                <li> <a href="#">Terreno</a></li>
+                <li> <a href="#">T3 A 5 MINTS DO CENTRO</a></li>
+            </div>
+            <div id="text_footer_4">
+                <li> <a href="#">Armazém Venda em Avidos e Lagoa, Vila...</a></li>
+                <li> <a href="#">Loja IMÓVEL DE BANCO - FINANCIAME...</a></li>
+                <li> <a href="#">Terreno agrícula</a></li>
+                <li> <a href="#">Moradia T4 em Palmela com vista para a ...</a></li>
+                <li> <a href="#">Venda de Lote com 942 m2, Fradelos, Vila...</a></li>
+            </div>
+
+        </ul>
+        <ul class="footer space">
+            <div id="img_footer_1">
+                <a href=".\index.html" id="img_footer"><img src="images/logo.png"></a>
+            </div>
+            <div id="text_footer_5">
+                <li> <a href="#">Sobre nós</a></li>
+                <li> <a href="#">Ajuda</a></li>
+                <li> <a href="#">Contacte-nos - Serviço Clientes</a></li>
+                <li> <a href="#">Preços</a></li>
+                <li> <a href="#">Termos de Utilização</a></li>
+                <li> <a href="#">Política de Privacidade</a></li>
+                <li> <a href="#">Configurações de Privacidade</a></li>
+                <li> <a href="#">Livro de reclamações online</a></li>
+                <li> <a href="#">Dicas</a></li>
+            </div>
+            <div id="text_footer_6">
+                <li>
+                    <h4>Serviços e Ferramentas</h4>
+                </li>
+                <li> <a href="#">Vantagens para Profissionais</a></li>
+                <li> <a href="#">Imovalor</a></li>
+                <li> <a href="#">Relatório Mercado</a></li>
+            </div>
+            <div id="text_footer_7">
+                <li>
+                    <h4>Mapa do Site</h4>
+                </li>
+                <li> <a href="#">Mapa do Site</a></li>
+                <li> <a href="#">Mapa de Distritos</a></li>
+                <li> <a href="#">Blog</a></li>
+                <li> <a href="#">Lista de Agências</a></li>
+                <li> <a href="#">Carreiras</a></li>
+            </div>
+            <div id="text_footer_8">
+                <div>
+                    <img src="images/icon_playstore.png" width="100" height="auto">
+                    <img src="images/icon_appstore.png" width="100" height="auto">
+                </div>
+                <li> <a href="#">Social</a></li>
+                <div>
+                    <img src="images/icon_facebook.png" width="35" height="auto">
+                    <img src="images/icon_youtube.png" width="35" height="auto">
+                    <img src="images/icon_instagram.png" width="35" height="auto">
+                </div>
+                <div>
+                    <img src="images/logo-escolha-consumidor-2021 (1).png" width="35" height="auto">
+                    <img src="images/logo-cinco-estrelas-2021 (1).png" width="57" height="auto">
+                </div>
+                
+            </div>
+        </ul>
+    </footer>
+</body>
+
+</html>

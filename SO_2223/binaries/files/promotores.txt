@@ -1,0 +1,2 @@
+promotor_oficial(mac)
+black_friday(mac)

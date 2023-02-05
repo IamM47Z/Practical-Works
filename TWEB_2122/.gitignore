@@ -1,0 +1,3 @@
+# remove auto generated .css files from .scss
+style.css.map
+style.css

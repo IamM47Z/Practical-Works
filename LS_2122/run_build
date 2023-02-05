@@ -1,0 +1,9 @@
+#!/bin/sh
+cd "$(dirname "$0")"
+cd word-search
+clear
+
+npm run build
+cd build
+npm start
+read -p "Press any key to resume ..."

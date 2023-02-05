@@ -1,0 +1,40 @@
+.control-panel
+{
+    background-color: rgb(28, 44, 49);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border-style: ridge;
+    border-color: black;
+    margin-right: 25%;
+    gap: 0.5em;
+    padding: 1em;
+}   
+
+.btn-group
+{
+    padding: 1em;
+}
+
+#word_list{
+    padding: 0em;
+}
+
+.add-words-group
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-words-group a 
+{
+    color: white !important;
+    text-decoration: none;
+}
+
+#new_word{
+    margin-left: 10px;
+    
+}

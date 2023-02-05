@@ -1,0 +1,14 @@
+.scoreboard
+{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: flex-start;
+    padding: 1em;
+    margin-top: 20px;
+    margin-right: 25%;
+    border-radius: 10px;
+    border-style: ridge;
+    border-color: black;
+    background-color: rgb(28, 44, 49);
+}

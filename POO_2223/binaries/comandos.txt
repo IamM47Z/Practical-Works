@@ -1,0 +1,9 @@
+animal m 1 1
+animal l 16 16
+animal c 20 1
+animal o 1 15
+
+food r 2 10
+food t 1 15
+food b 10 10
+food a 16 4

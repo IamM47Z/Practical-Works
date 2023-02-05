@@ -1,0 +1,4 @@
+# remove binaries and objects folder
+objects/
+binaries/frontend
+binaries/backend
