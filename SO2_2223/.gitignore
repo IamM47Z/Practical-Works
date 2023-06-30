@@ -1,0 +1,7 @@
+.vs
+.DS_Store
+
+x64
+arm64
+
+*.aps
