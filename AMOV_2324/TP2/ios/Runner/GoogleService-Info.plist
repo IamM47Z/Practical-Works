@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAGh__TLAvW5f_VPBySiqiBkZCMjpylW4s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>976257565610</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.locatewikiFlutter</string>
+	<key>PROJECT_ID</key>
+	<string>locatewiki2324</string>
+	<key>STORAGE_BUCKET</key>
+	<string>locatewiki2324.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:976257565610:ios:5dd4a0f4eb24b131fa61d3</string>
+</dict>
+</plist>
